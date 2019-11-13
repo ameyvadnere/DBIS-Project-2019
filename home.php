@@ -9,14 +9,14 @@ exit();
 
 $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
-$DATABASE_PASS = 'oblivion';  
+$DATABASE_PASS = '';  
 $DATABASE_NAME = 'dbisproject';
 $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 if (mysqli_connect_errno()) {
 die ('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
 
-$stmt = $con->prepare('SELECT item_name, tag, interest, security_deposit, status FROM item');
+$stmt = $con->prepare('SELECT item_id, item_name, tag, interest, security_deposit, status FROM item');
 
 if (!$stmt) {
     throw new Exception($con->error, $con->errno);
@@ -52,8 +52,8 @@ $num_of_rows = $result->num_rows;
 
 <div class="container">
   <div class="row">
-<?php
 
+<?php
 
 while ($row = $result->fetch_assoc())
 { /*echo '<p>';
@@ -64,7 +64,8 @@ echo 'Security Deposit:' .$row['security_deposit'].'<br>';
 echo 'Status:' .$row['status'].'<br>----------------------------------';
 echo '</p><br><br>';*/
 
-
+  
+$itemid = $_GET["item_for_borrowing"];
 
 
 ?>
@@ -73,7 +74,7 @@ echo '</p><br><br>';*/
 
 <div class="col-sm-4>">
 <div class="card-columns-fluid">
-<div class="card mb-3" style=" width: 30%">
+<div class="card mb-3" style=" width: 60%">
   <h3 class="card-header">Card header</h3>
   <div class="card-body">
     <h5 class="card-title"><?php echo $row['item_name'] ?></h5>
@@ -89,8 +90,9 @@ echo '</p><br><br>';*/
     <li class="list-group-item"><?php echo 'Status: ' .$row['status'] ?></li>
   </ul>
   <div class="card-body">
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
+    <form method="GET" action="itemdescription.php?item_id=$itemid">
+      <button><input type="hidden" name="item_for_borrowing" value=<?php echo $row['item_id']; ?>>Borrow</button>
+    </form>
   </div>
   <div class="card-footer text-muted">
     2 days ago
@@ -104,15 +106,6 @@ echo '</p><br><br>';*/
 </div>
 
 
-<div class="jumbotron">
-  <h1 class="display-3">Hello, world!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-  </p>
-</div>
 
 
 
