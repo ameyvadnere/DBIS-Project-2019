@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Login</title>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+		<link href="style.css" rel="stylesheet" type="text/css">
+		<link href="bootstrap-lumen.css" rel="stylesheet" type="text/css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	</head>
+
+
+
+	<body>
+
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					<a class="navbar-brand" href="#">Navbar</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+					  <span class="navbar-toggler-icon"></span>
+					</button>
+				  
+					<div class="collapse navbar-collapse" id="navbarColor03">
+					  <ul class="navbar-nav mr-auto">
+						<li class="nav-item active">
+						  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+						  <a class="nav-link" href="#">Features</a>
+						</li>
+						<li class="nav-item">
+						  <a class="nav-link" href="#">Pricing</a>
+						</li>
+						<li class="nav-item">
+						  <a class="nav-link" href="#">About</a>
+						</li>
+					  </ul>
+					  <form class="form-inline my-2 my-lg-0">
+						<input class="form-control mr-sm-2" type="text" placeholder="Search">
+						<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+					  </form>
+					</div>
+				  </nav>
+
+		<!--<div class="login">
+			<h1>Login</h1>
+			<div class="form-group has success">
+				<form action="authenticate.php" method="post">
+					<label class="form-control-label" for="userid">Valid Input</label>
+					</label>
+					<input type="text" name="userid" placeholder="User ID" id="userid" required>
+					<label for="password">
+						<i class="fas fa-lock"></i>
+					</label>
+					<input type="password" name="password" placeholder="Password" id="password" required>
+					<input type="submit" value="Login">
+				</form>
+			</div>
+		</div>
+
+		<button type="button" id="btn_take_to_registration.php"><a href="registration.php">Create Account</a></button>-->
+
+		<br><br><br><br><br>		
+
+		<center>
+		<div class="card border-dark mb-3" style="max-width: 30rem;">
+			<br>
+			<p class="text-primary"><h3><b>Login</b></h3></p>
+			<div class="card-body">
+			  
+			  <form action="authenticate.php" method="post" >
+				<fieldset>
+					<div class="form-group col-md-9">
+						<label for="userid"><p class="text-primary">Enter UserId</p></label>
+						<input type="text" class="form-control" name="userid" id="userid" placeholder="Enter UserId">
+						<small id="useridhelp" class="form-text text-muted">We'll never share your credentials</small>
+					</div>
+					<div class="form-group col-md-9">
+						<label for="password"><p class="text-primary">Password</p></label>
+						<input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+						<div class="invalid-feedback">Sorry, that username's taken. Try another?</div>
+					  </div>
+					
+					  <center><button type="submit" class="btn btn-primary">Submit</button><br><br>
+						<a href="registration.php">New member? Register now!</a>
+					</center>
+				</fieldset>
+	
+			</form>
+			</div>
+		  </div>
+		  </div>
+
+		  </center>
+	</body>
+</html>
