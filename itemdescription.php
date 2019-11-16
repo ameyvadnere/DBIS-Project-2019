@@ -73,7 +73,9 @@ $stmt1->close();
         <p>Tag: <?php echo $tag; ?></p>
 
         <form action="borrow.php" method="POST">
+        <input type="hidden" name="itemid" value=<?php echo $_GET['item_for_borrowing'];?>>
             <button><input type="hidden" name="borrow_button">Borrow</button>
+            
         </form> 
     </body>
 </html>
