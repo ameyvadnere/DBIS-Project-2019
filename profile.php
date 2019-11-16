@@ -67,6 +67,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["EditCreds"]))
 
 	<body>
 
+	<form action="addfundstowallet.php" method="POST">
+	
+	<input type="submit" value="Add Funds to Wallet">
+	
+	</form>
+
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Navbar</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["EditCreds"]))
 </nav>
 
 
-  </button>
+  
 		<p><?php echo "User Id: " . $user_id . '<br>'; ?><p>
 		<p><?php echo "Name: " . $name . '<br>'; ?><p>
 		<p><?php echo "Phone No.: " . $phone_number . '<br>'; ?><p>
