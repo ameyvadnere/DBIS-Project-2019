@@ -1,7 +1,7 @@
 <?php 
     session_start();
     // If the user is not logged in redirect to the login page...
-    if (!isset($_SESSION['loggedin'])) {
+    if ($_SESSION['loggedin'] == FALSE) {
         header('Location: index.html');
         exit();
     }
@@ -121,32 +121,68 @@ function test_input($data) {
 
 
 <html>
+    <head>
     <title>Add Item</title>
+    <link href="bootstrap-lumen.css" rel="stylesheet" type="text/css">
+    </head>
 
+    <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+					<a class="navbar-brand" href="#">Navbar</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+					  <span class="navbar-toggler-icon"></span>
+					</button>
+				  
+					<div class="collapse navbar-collapse" id="navbarColor03">
+					  <ul class="navbar-nav mr-auto">
+						<li class="nav-item active">
+						  <a class="nav-link" href="home.php">Home <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+						  <a class="nav-link" href="profile.php">Profile</a>
+						</li>
+						
+					  </ul>
+					  
+					</div>
+				  </nav>
+
+<br><br><br><br>
+
+                  <div class="card border-dark mb-3" style="max-width:50rem;margin:auto;">
+  <h3 style="margin-left:10%;"><p class="text-primary"><strong>Add Item</strong></p></h3>
+  <div class="card-body" style="align:center;">
   <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
 
-  <?php echo $_SESSION['id']; ?>
+  
 
-        Item Name: <input type = "text" name="itemname" value="<?php echo htmlspecialchars($itemname);?>">
-        <span class="error">*<?php echo $itemnameErr; ?></span>
-        <br>        <br>
-        Tag: <input type="text" name="tag" value="<?php echo htmlspecialchars($tag);?>">
-        <br><br>
-        Status: <span class="error">*<?php echo $statusErr; ?></span>
-        <br><input type="radio" name="status" value="Available"> Available<br>
-        <input type="radio" name="status" value="Not Available"> Not Available<br>
-        <br><br>
-        Interest: <input type="number" name="interest" min="0" value="<?php echo htmlspecialchars($interest);?>">
-        <span class="error">*<?php echo $interestErr?></span>
-        <br><br>
-        Security Deposit: <input type="number" name="securitydeposit" value="<?php echo htmlspecialchars($sec_dept);?>">
-        <span class="error">*<?php echo $securitydepositErr ?></span>
-        <br><br>
-        No. of days to be lent: <input type="number" name="maxlenddays" value="<?php echo htmlspecialchars($maxlenddays);?>">
-        <span class="error">*<?php echo $maxlenddaysErr ?></span>
-        <br><br>
-        <input type="submit" name="additem" value="Add Item!">
+Item Name*: <input class="form-control col-sm-10" type="text" name="itemname" value="<?php echo htmlspecialchars($itemname);?>">
+<span class="error"><?php echo $itemnameErr; ?></span>
+<br>        <br>
+Tag: <input class="form-control col-sm-10" type="text" name="tag" value="<?php echo htmlspecialchars($tag);?>">
+<br><br>
+Status: <span class="error"><?php echo $statusErr; ?></span>
+<br><input type="radio" name="status" value="Available"> Available<br>
+<input type="radio" name="status" value="Not Available"> Not Available<br>
+<br><br>
+Fees*: <input class="form-control col-sm-10" type="number" name="interest" min="0" value="<?php echo htmlspecialchars($interest);?>">
+<span class="error"><?php echo $interestErr?></span>
+<br><br>
+Security Deposit*: <input class="form-control col-sm-10" type="number" name="securitydeposit" value="<?php echo htmlspecialchars($sec_dept);?>">
+<span class="error"><?php echo $securitydepositErr ?></span>
+<br><br>
+No. of days to be lent*: <input class="form-control col-sm-10" type="number" name="maxlenddays" value="<?php echo htmlspecialchars($maxlenddays);?>">
+<span class="error"><?php echo $maxlenddaysErr ?></span>
+<br><br>
+<input class="btn btn-primary" type="submit" name="additem" value="Add Item!">
 
-    </form>
+</form>
+    
+  </div>
+</div>
 
+
+  
+</body>
 </html>

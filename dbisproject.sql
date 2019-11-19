@@ -16,6 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `admin`
+--
+
+DROP TABLE IF EXISTS `admin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `admin` (
+  `admin_id` varchar(30) DEFAULT NULL,
+  `admin_password` varchar(20) DEFAULT NULL,
+  `admin_wallet` float NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admin`
+--
+
+LOCK TABLES `admin` WRITE;
+/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+INSERT INTO `admin` VALUES ('admin','admin',0);
+/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `delivery`
 --
 
@@ -68,11 +92,12 @@ CREATE TABLE `item` (
   `interest` decimal(10,0) NOT NULL,
   `security_deposit` decimal(10,0) NOT NULL,
   `max_lend_days` int(11) NOT NULL,
+  `image_name` varchar(50) DEFAULT 'default.jpeg',
   PRIMARY KEY (`item_id`),
   UNIQUE KEY `item_id` (`item_id`),
   KEY `issuer_id` (`issuer_id`),
   CONSTRAINT `issuer_id` FOREIGN KEY (`issuer_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,7 +106,7 @@ CREATE TABLE `item` (
 
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` VALUES (1,'Oj','Redmi Note 4',NULL,NULL,'Available',10,100,100),(2,'PJ','Mattress',NULL,NULL,'Available',100,500,10),(3,'Oj','Sony headphone','headphone',NULL,'Available',12,120,12),(4,'Oj','Tupperware bottle','',NULL,'Available',10,10,10),(5,'Oj','Lenovo PowerBank','',NULL,'Not Available',123,124,1),(6,'Oj','Adidas shoes','NULL',NULL,'Available',123,1234,12),(7,'Oj','Puma Shoes','',NULL,'Available',12344,124,2),(8,'123','Patanjali Choorna','Health',NULL,'Available',54,334,33);
+INSERT INTO `item` VALUES (9,'170010007@iitdh.ac.in','Mattress','Lifestyle',NULL,'Available',100,500,10,'matress.jpeg'),(10,'170010007@iitdh.ac.in','Life of Pie','Book',NULL,'Available',10,50,20,'Lifeofpie.jpeg'),(11,'170010007@iitdh.ac.in','Redmi Note 5','Mobile',NULL,'Available',500,3000,30,'redminote5.jpeg'),(12,'170010002@iitdh.ac.in','20 Chairs','Lifestyle',NULL,'Available',5,10,2,'extensionboards.jpeg'),(13,'170010002@iitdh.ac.in','20 Tables','Lifestyle',NULL,'Available',5,10,2,'cycle.jpeg'),(14,'170010002@iitdh.ac.in','30 Beds','Lifestyle',NULL,'Available',200,500,10,'almirah.jpeg'),(15,'170010004@iitdh.ac.in','10 Extension Boards','Electrical Equipment',NULL,'Available',50,100,15,'extensionboards.jpeg'),(16,'170010004@iitdh.ac.in','Cycle','Adventure Equipment',NULL,'Available',500,1000,20,'cycle.jpeg'),(17,'170010004@iitdh.ac.in','Almirah','Lifestyle',NULL,'Available',500,1000,200,'almirah.jpeg'),(18,'170010007@iitdh.ac.in','2 States','Book',NULL,'Available',30,70,20,'2states.jpeg'),(19,'170010002@iitdh.ac.in','Lenovo Ideapad 2020','Electronic',NULL,'Available',1000,5000,30,'default.jpeg');
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,10 +123,9 @@ CREATE TABLE `transaction` (
   `borrower_id` varchar(30) NOT NULL,
   `returning_date` date DEFAULT NULL,
   `borrowing_date` date DEFAULT NULL,
-  `sec_dep_status` varchar(10) NOT NULL,
-  `interest_status` varchar(10) NOT NULL,
   `packaging1_id` bigint(20) unsigned NOT NULL,
   `packaging2_id` bigint(20) unsigned NOT NULL,
+  `ongoing_status` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`transaction_id`),
   UNIQUE KEY `transaction_id` (`transaction_id`),
   KEY `item_id` (`item_id`),
@@ -109,10 +133,8 @@ CREATE TABLE `transaction` (
   KEY `packaging1_id` (`packaging1_id`),
   KEY `packaging2_id` (`packaging2_id`),
   CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`),
-  CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`borrower_id`) REFERENCES `user` (`user_id`),
-  CONSTRAINT `transaction_ibfk_3` FOREIGN KEY (`packaging1_id`) REFERENCES `delivery` (`packaging_id`),
-  CONSTRAINT `transaction_ibfk_4` FOREIGN KEY (`packaging2_id`) REFERENCES `delivery` (`packaging_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`borrower_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,6 +143,7 @@ CREATE TABLE `transaction` (
 
 LOCK TABLES `transaction` WRITE;
 /*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
+INSERT INTO `transaction` VALUES (39,12,'170010007@iitdh.ac.in','2019-11-17','2019-11-17',1234,1234,'completed'),(40,10,'170010002@iitdh.ac.in','2019-11-17','2019-11-17',1234,1234,'completed'),(41,10,'170010004@iitdh.ac.in','2019-11-17','2019-11-17',1234,1234,'completed'),(42,9,'170010004@iitdh.ac.in','2019-11-17','2019-11-17',1234,1234,'completed'),(43,10,'170010004@iitdh.ac.in','2019-11-18','2019-11-18',1234,1234,'completed'),(50,16,'170010002@iitdh.ac.in','2019-11-18','2019-11-18',1234,1234,'completed'),(51,19,'170010004@iitdh.ac.in','2019-11-18','2019-11-18',1234,1234,'completed'),(52,19,'170010004@iitdh.ac.in','2019-11-18','2019-11-18',1234,1234,'completed'),(53,9,'170010002@iitdh.ac.in','2019-11-18','2019-11-18',1234,1234,'completed'),(54,9,'170010002@iitdh.ac.in','2019-11-18','2019-11-18',1234,1234,'completed'),(55,17,'170010002@iitdh.ac.in','2019-11-18','2019-11-18',1234,1234,'completed');
 /*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,6 +164,7 @@ CREATE TABLE `user` (
   `account_num` varchar(30) DEFAULT NULL,
   `bank_name` varchar(30) DEFAULT NULL,
   `ifsc_code` varchar(30) DEFAULT NULL,
+  `wallet` float DEFAULT '0',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -151,7 +175,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('1','1','1','1212121212','123','NULL','NULL','NULL','NULL'),('123','123','123','123','123','NULL','NULL','NULL','NULL'),('1245','1234','21456','1234567890','oasdfj','sdf','NULL','NULL','NULL'),('Ameybhau','12345','Amey Vadnere','','amey','NULL','NULL','NULL','NULL'),('AmeyBhauVadnere','12345','Amey Vadnere','2222222222','amey619rocks@gmail.com','skflaj','1','Swiss Bank','5UCK1T'),('AmeyBhauVadnere2','12345','fas','1233422222','fdsaf','fsfg','ggs','s','44'),('Oj','qwer1234','Ojas Raundale','8692854808','170010004@iitdh.ac.in','hostel 3','NULL','NULL','NULL'),('PJ','dharwad','Prateek Jain','8279803383','170010007@iitdh.ac.in','Hostel 3','3456578901234','SBI','SBI78989078');
+INSERT INTO `user` VALUES ('170010002@iitdh.ac.in','student2','Ameya Vadnere','9876543210','170010002@iitdh.ac.in','Hostel 3, Abheri','678954321234','Canara','CNB54325433',50835),('170010004@iitdh.ac.in','student3','Ojas Raundale','7896432156','170010004@iitdh.ac.in','Hostel 3, Abheri','678954321678','Bank of Baroda','BOB54685439',21260),('170010007@iitdh.ac.in','student1','Prateek Jain','8279803383','170010007@iitdh.ac.in','Hostel 3, Abheri','190823457632','SBI','SBI65432456',825);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -164,4 +188,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-13 10:03:38
+-- Dump completed on 2019-11-18  3:31:10

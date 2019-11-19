@@ -8,7 +8,7 @@ $DATABASE_NAME = 'dbisproject';
 //Try and connect using the info above.
 if (isset($_POST['logout']))
 {
-	$_SESSION['loggedin'] = FALSE;
+	$_SESSION['adminloggedin'] = FALSE;
 	header('Location: index.html');
 }
 $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
@@ -22,9 +22,9 @@ if ( !isset($_POST['userid']) && !isset($_POST['password']) ) {
 }
 
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-if ($stmt = $con->prepare('SELECT user_id, user_password FROM user WHERE user_id = ?')) {
+if ($stmt = $con->prepare('SELECT admin_id, admin_password FROM admin WHERE admin_id = "admin"')) {
 	// Bind parameters (s = string, i = int, b = blob, etc), in our case the username is a string so we use "s"
-	$stmt->bind_param('s', $_POST['userid']);
+	//$stmt->bind_param('s', $_POST['userid']);
 	$stmt->execute();
 	// Store the result so we can check if the account exists in the database.
 	$stmt->store_result();
@@ -41,16 +41,16 @@ if ($stmt->num_rows > 0) {
 		// Verification success! User has loggedin!
 		// Create sessions so we know the user is logged in, they basically act like cookies but remember the data on the server.
 		session_regenerate_id();
-		$_SESSION['loggedin'] = TRUE;
+		$_SESSION['adminloggedin'] = TRUE;
 		//$_SESSION['name'] = $_POST['username'];
-		$_SESSION['id'] = $id;
-		header('Location: home.php');
+		//$_SESSION['id'] = $id;
+		header('Location: admin_home.php');
 		//echo 'HO gaya!';
 	} else {
 
 		echo '<script type="text/javascript">alert("Wrong username or Password")</script>';
 		
-		header('Location:index.html');
+		header('Location:admin_index.html');
 		echo 'Incorrect password!';
 	}
 } else {

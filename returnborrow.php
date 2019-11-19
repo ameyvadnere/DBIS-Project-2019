@@ -6,12 +6,15 @@ if ($_SESSION['loggedin'] == FALSE) {
 header('Location: index.html');
 exit();
 }
-if ($_SESSION['NEXT1'] == FALSE) {
-    header('Location: home.php');
+if ($_SESSION['prev'] == FALSE) {
+    header('Location: profile.php');
     exit();
     }
-    $_SESSION['NEXT1'] = FALSE;
-    $_SESSION['NEXT2'] = TRUE;
+
+    $_SESSION['prev'] = FALSE;
+    $_SESSION['prev1'] = TRUE;
+
+
 $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = '';  
@@ -48,10 +51,12 @@ $stmt->close();
 
 <!DOCTYPE html>
     <head>
-        <title>Delivery Method</title>
-        <link rel="stylesheet" href="bootstrap-lumen.css">
+        <title>Return Delivery</title>
+        <link href="bootstrap-lumen.css" rel="stylesheet">
     </head>
+    
     <body>
+
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
 					<a class="navbar-brand" href="#">Navbar</a>
@@ -72,39 +77,31 @@ $stmt->close();
 						</li>
 						
 					</div>
-                  </nav>
-                  
-    <br><br><br>
+				  </nav>
 
-    <div class="card border-dark mb-3" style="max-width:40rem;margin:auto;">
-    
-  <h3  class="card-header" style="text-align: center;><p class="text-primary"><strong>Select Delivery Mode</strong></p></h3>
-  <div class="card-body" style="margin:auto;">
-  <div class="container">
-            <div class="row justify-content-center" style="margin-left:-50%;">
-                    <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
-                            <h3 display ="md-4">Select mode of delivery: </h3>
-                        <br>
-                    <form action="payment.php" method="POST">
-                    
-                        
-                        
 
-                    <input type="radio" id="customRadio1" name="deliveryfees" value="0" required>Pickup yourself<br></label>
-                    <input  id="customRadio2" type="radio" name="deliveryfees" value="60">Indian Post<br>
-                    <input  type="radio" id="customRadio3" name="deliveryfees" value="80">Delhivery<br>
-                    <input  type="radio" id="customRadio4" name="deliveryfees" value="100">FedEx<br><br>
-                    <input type="hidden" name="itemid" value=<?php echo $_POST['itemid']; ?>                            >
-                        <input class="btn btn-primary" type="submit" name="deliverymode" value="Pay">
-                    </form>
-                </div>
-            </div>
-        </div>
+                  <br><br><br>
+
+                  <div class="card border-dark mb-3" style="max-width:30rem;margin:auto;"><br>
+  <h3 style="margin-left:10%;"><p class="text-primary"><strong>Select Delivery Mode</strong></p></h3>
+  <div class="card-body" style="margin-left:20%;">
+  <form action="returnpayment.php" method="POST">
+            <input type="radio" name="deliveryfees" value="0" required>Drop yourself<br>
+            <input type="radio" name="deliveryfees" value="60">Indian Post<br>
+            <input type="radio" name="deliveryfees" value="80">Delhivery<br>
+            <input type="radio" name="deliveryfees" value="100">FedEx<br><br>
+            <input type="hidden" name="borrowerid" value=<?php echo $_POST['borrowerid'];?>>
+            <input type ="hidden" name = "borroweditemid" value = <?php echo $_POST["borroweditemid"];?> >
+            <input type ="hidden" name = "issuerid" value = <?php echo $_POST["issuerid"];?> >
+				<input type ="hidden" name = "borrowedtransactionid" value = <?php echo $_POST["borrowedtransactionid"];?> > 
+
+            <input class="btn btn-primary" type="submit" name="deliverymode" value="Pay">
+        </form>
     
   </div>
 </div>
-
         
 
+        
     </body>
 </html>

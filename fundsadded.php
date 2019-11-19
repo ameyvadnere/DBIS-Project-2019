@@ -1,5 +1,10 @@
 <?php
 session_start();
+if ($_SESSION['loggedin'] == FALSE) {
+header('Location: index.html');
+exit();
+}
+
 // Change this to your connection info.
 $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
@@ -12,7 +17,7 @@ if ( mysqli_connect_errno() ) {
 	die ('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
 
-$stmt = $con->prepare("UPDATE user SET wallet = ? WHERE user_id = ?");
+$stmt = $con->prepare("UPDATE user SET wallet = wallet + ? WHERE user_id = ?");
 
 if (!$stmt){
     echo "stmt error";
@@ -27,7 +32,7 @@ if (!$stmt->execute()) {
     }
 
     else{
-    $stmt->execute();
+    //$stmt->execute();
     //echo "Executed";
     //throw new Exception($stmt->error, $stmt->errno);
     $stmt->close();
@@ -38,6 +43,7 @@ if (!$stmt->execute()) {
 
 <!DOCTYPE html>
     <head>
+    <link rel="stylesheet" href="bootstrap-lumen.css">
         <title>Funds Confirmation</title>
         <script type="text/javascript">
             window.setTimeout(function(){
@@ -51,16 +57,18 @@ if (!$stmt->execute()) {
 
     
 <body>
-    <?php echo $_POST["taketofundsadded"]; ?>
-    <p id="waittime" style="display:">Please wait for confirmation....</p>
-
+    <br><br><br>
+    <center>
+    <h2 class="text-secondary" id="waittime" style="display:">Please wait for confirmation....</h2>
+                
     <div id="fundsadded" style="display:none">
-        <p>Funds Added!</p>
+        <h2 class="text-success"><strong>Funds Added! Redirecting you to your profile page.....</strong></p>
         <!--<button><a href="profile.php">Go back to Profile Page</a></button> -->
         <?php 
   header( "refresh:10; url=profile.php" ); 
 ?>
 </div>
+</center>
 </body>
 
 </html>
